@@ -1,0 +1,15 @@
+{
+  "name": "try-archunit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "silverbirder <silverbirder@gmail.com> (https://silver-birder.github.io)",
+  "license": "ISC",
+  "devDependencies": {
+    "tsarch": "^5.1.1"
+  }
+}
