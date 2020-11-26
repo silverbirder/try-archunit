@@ -1,0 +1,14 @@
+@startuml
+  component [web] #Blue
+  component [presenters] #Green
+  component [gateways] #Green
+  component [controllers] #Green
+  component [use_cases] #Red
+  component [entities] #Yellow
+
+  web --> presenters
+  web --> controllers
+  web --> gateways
+  controllers --> use_cases
+  use_cases --> entities
+@enduml
