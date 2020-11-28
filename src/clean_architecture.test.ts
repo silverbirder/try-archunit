@@ -4,59 +4,13 @@ import * as path from "path";
 
 describe("architecture", () => {
     it("Check dependency", async () => {
-        const exampleUml = path.resolve(__dirname, "clean_architecture.puml");
+        const architectureUml = path.resolve(__dirname, "clean_architecture.puml");
         const violations = await slicesOfProject()
             .definedBy("src/(**)/")
             .should()
-            .adhereToDiagramInFile(exampleUml)
+            .adhereToDiagramInFile(architectureUml)
             .check();
-        const expected = [{
-            rule: null,
-            projectedEdge: {
-                sourceLabel: '2_application_business_rules',
-                targetLabel: '1_enterprise_business_rules',
-                cumulatedEdges: [{
-                    "external": false,
-                    "source": "src/2_application_business_rules/use_cases/UseCase.ts",
-                    "target": "src/1_enterprise_business_rules/entities/Entity.ts",
-                }]
-            }
-        }, {
-            rule: null,
-            projectedEdge: {
-                sourceLabel: '3_interface_adapters',
-                targetLabel: '2_application_business_rules',
-                cumulatedEdges: [{
-                    "external": false,
-                    "source": "src/3_interface_adapters/controllers/Controller.ts",
-                    "target": "src/2_application_business_rules/use_cases/UseCase.ts",
-                }]
-            }
-        }, {
-            rule: null,
-            projectedEdge: {
-                sourceLabel: '4_frameworks_and_drivers',
-                targetLabel: '3_interface_adapters',
-                cumulatedEdges: [
-                    {
-                        "external": false,
-                        "source": "src/4_frameworks_and_drivers/web/Web.ts",
-                        "target": "src/3_interface_adapters/gateways/Gateway.ts",
-                    },
-                    {
-                        "external": false,
-                        "source": "src/4_frameworks_and_drivers/web/Web.ts",
-                        "target": "src/3_interface_adapters/controllers/Controller.ts",
-                    },
-                    {
-                        "external": false,
-                        "source": "src/4_frameworks_and_drivers/web/Web.ts",
-                        "target": "src/3_interface_adapters/presenters/Presenter.ts",
-                    },
-                ]
-            }
-        }];
-        expect(violations).toEqual(expected);
+        await expect(violations).toEqual([])
     });
     it("Check 4_frameworks_and_drivers file name.", async () => {
         const violations = await filesOfProject()
@@ -73,7 +27,6 @@ describe("architecture", () => {
             .should()
             .matchPattern(".*Controller\.ts")
             .check();
-
         const violations2 = await filesOfProject()
             .inFolder("3_interface_adapters/gateways")
             .should()

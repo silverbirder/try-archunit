@@ -1,14 +1,10 @@
 @startuml
-  component [web] #Blue
-  component [presenters] #Green
-  component [gateways] #Green
-  component [controllers] #Green
-  component [use_cases] #Red
-  component [entities] #Yellow
+  component [4_frameworks_and_drivers] #Blue
+  component [3_interface_adapters] #Green
+  component [2_application_business_rules] #Red
+  component [1_enterprise_business_rules] #Yellow
 
-  web --> presenters
-  web --> controllers
-  web --> gateways
-  controllers --> use_cases
-  use_cases --> entities
+  4_frameworks_and_drivers --> 3_interface_adapters
+  3_interface_adapters --> 2_application_business_rules
+  2_application_business_rules --> 1_enterprise_business_rules
 @enduml
